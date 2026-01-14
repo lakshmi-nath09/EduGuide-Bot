@@ -46,10 +46,11 @@ After completing Intermediate education, many students face confusion in choosin
 ## 📂 Project Structure
 EduGuide-Bot/
 │
-├── index.html
-├── style.css
-├── script.js
-├── README.md
+├── index.html       → Main HTML file for chatbot interface
+├── style.css        → CSS file for styling the chatbot
+├── script.js        → JavaScript file handling chatbot logic and voice input
+├── README.md        → Project documentation
+
 
 ---
 
@@ -72,7 +73,7 @@ EduGuide-Bot/
 
 ## 🎥 Demo Video
 
-[Click here to watch the EduGuide Bot demo](https://1drv.ms/v/c/EE3A5437C029F276/IQCGzjKxSFwEQ6XelUBPhIO-AVXD51HYWxoQf0BdupIsvgo?e=jMMPQK)
+[Click here to watch the EduGuide Bot demo](https://drive.google.com/file/d/13op99ri-Zdb4mp_HC199SlS0vwf30avw/view?usp=sharing)
 
 ---
 
@@ -105,5 +106,4 @@ EduGuide-Bot/
 EduGuide Bot provides structured and reliable educational guidance through an interactive chatbot interface. It simplifies career decision-making for students by offering clear information on courses, exams, and career paths in an easy and accessible manner.
 
 
-## 📂 Project Structure
 
