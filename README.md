@@ -1,5 +1,3 @@
-# EduGuide-Bot
-EduGuide Bot is GUI Based Educational Guidance Chatbot
 # 🎓 EduGuide Bot
 
 EduGuide Bot is a GUI-based educational guidance chatbot developed using HTML, CSS, and JavaScript.
