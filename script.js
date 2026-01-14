@@ -1,7 +1,7 @@
 const chat = document.getElementById("chat-body");
 const input = document.getElementById("textInput");
 
-/* -------- Display Messages -------- */
+/* ---------- Helpers ---------- */
 function botMessage(text) {
     chat.innerHTML += `<div class="bot">${text}</div>`;
     chat.scrollTop = chat.scrollHeight;
@@ -22,13 +22,13 @@ function showButtons(buttons) {
     chat.scrollTop = chat.scrollHeight;
 }
 
-/* -------- Conversation Flow -------- */
+/* ---------- Bot Flow ---------- */
 function startBot() {
     botMessage("Hi 👋 I am EduGuide Bot. How can I help you?");
     showButtons([
-        { text: "Courses after Inter", action: "afterInter()" },
+        { text: "Courses", action: "afterInter()" },
         { text: "Exams", action: "exams()" },
-        { text: "Career", action: "careers()" }
+        { text: "Careers", action: "careers()" }
     ]);
 }
 
@@ -36,44 +36,47 @@ function afterInter() {
     userMessage("Courses after Inter");
     botMessage("You can choose:");
     showButtons([
-        { text: "B.Tech", action: "simpleReply('B.Tech branches: CSE, AI & DS, ECE, EEE, MECH')" },
-        { text: "Degree", action: "simpleReply('Degree courses: B.Sc, B.Com, B.A')" },
-        { text: "Diploma", action: "simpleReply('Diploma options: Polytechnic, ITI')" }
+        { text: "B.Tech", action: "reply('B.Tech branches: CSE, AI & DS, ECE, EEE, MECH')" },
+        { text: "Degree", action: "reply('Degree courses: B.Sc, B.Com, B.A')" },
+        { text: "Diploma", action: "reply('Diploma options: Polytechnic, ITI')" }
     ]);
 }
 
 function exams() {
     userMessage("Exams");
-    botMessage("Popular exams include EAMCET, JEE, NEET, GATE.");
+    botMessage("Popular exams: EAMCET, JEE, GATE.");
     backMenu();
 }
 
 function careers() {
-    userMessage("Career");
+    userMessage("Careers");
     botMessage("Career options: Software Engineer, Data Analyst, Government Jobs.");
     backMenu();
 }
 
-function simpleReply(text) {
+function reply(text) {
     botMessage(text);
     backMenu();
 }
 
 function backMenu() {
-    showButtons([{ text: "Back to Menu", action: "startBot()" }]);
+    showButtons([
+        { text: "Back to Menu", action: "startBot()" }
+    ]);
 }
 
-/* -------- TEXT INPUT HANDLING -------- */
+/* ---------- TEXT INPUT ---------- */
 function handleText() {
-    let msg = input.value.toLowerCase();
-    if (!msg) return;
+    let msg = input.value.trim().toLowerCase();
+    if (msg === "") return;
+
     userMessage(msg);
     input.value = "";
 
-    if (msg.includes("hi")) {
+    if (msg === "hi" || msg === "hello") {
         startBot();
     }
-    else if (msg.includes("courses")) {
+    else if (msg.includes("course")) {
         afterInter();
     }
     else if (msg.includes("exam")) {
@@ -90,10 +93,17 @@ function handleText() {
     }
 }
 
-/* -------- VOICE INPUT -------- */
+/* ---------- ENTER KEY SUPPORT ---------- */
+input.addEventListener("keypress", function (e) {
+    if (e.key === "Enter") {
+        handleText();
+    }
+});
+
+/* ---------- VOICE INPUT ---------- */
 function startVoice() {
     if (!('webkitSpeechRecognition' in window)) {
-        alert("Voice not supported in this browser");
+        alert("Voice recognition not supported. Use Google Chrome.");
         return;
     }
 
@@ -101,12 +111,12 @@ function startVoice() {
     recognition.lang = "en-US";
     recognition.start();
 
-    recognition.onresult = function(event) {
+    recognition.onresult = function (event) {
         const speech = event.results[0][0].transcript;
         input.value = speech;
         handleText();
     };
 }
 
-/* Start bot */
+/* ---------- START ---------- */
 startBot();
