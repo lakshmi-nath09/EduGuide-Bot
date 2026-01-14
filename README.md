@@ -47,6 +47,7 @@ After completing Intermediate education, many students face confusion in choosin
 
 EduGuide-Bot/
 │
+
 ├── index.html      
 ├── style.css       
 ├── script.js       
