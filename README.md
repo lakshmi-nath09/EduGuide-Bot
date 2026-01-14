@@ -46,7 +46,7 @@ After completing Intermediate education, many students face confusion in choosin
 ## 📂 Project Structure
 
 EduGuide-Bot/
-│
+
 
 ├── index.html      
 ├── style.css       
