@@ -47,10 +47,10 @@ After completing Intermediate education, many students face confusion in choosin
 
 EduGuide-Bot/
 │
-├── index.html       → Main HTML file for chatbot interface
-├── style.css        → CSS file for styling the chatbot
-├── script.js        → JavaScript file handling chatbot logic and voice input
-└── README.md        → Project documentation
+├── index.html      
+├── style.css       
+├── script.js       
+└── README.md   
 
 
 
