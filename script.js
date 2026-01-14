@@ -32,17 +32,19 @@ function startBot() {
     ]);
 }
 
-/* ---------- COURSES ---------- */
+/* ---------- COURSES AFTER INTER ---------- */
 function afterInter() {
     userMessage("Courses after Inter");
     botMessage("You can choose:");
     showButtons([
         { text: "B.Tech", action: "btechBranches()" },
-        { text: "Degree", action: "degree()" },
+        { text: "Degree", action: "degreeOptions()" },
+        { text: "Medical", action: "medical()" },
         { text: "Diploma", action: "diploma()" }
     ]);
 }
 
+/* ---------- B.TECH ---------- */
 function btechBranches() {
     userMessage("B.Tech");
     botMessage("Choose a B.Tech branch:");
@@ -56,7 +58,7 @@ function btechBranches() {
 }
 
 function cse() {
-    botMessage("💻 CSE (Computer Science Engineering): Programming, software development, AI, ML, data science and web technologies.");
+    botMessage("💻 CSE: Programming, software development, AI, ML, data science, cybersecurity and web technologies.");
     backMenu();
 }
 
@@ -66,7 +68,7 @@ function ai() {
 }
 
 function ece() {
-    botMessage("📡 ECE: Communication systems, VLSI, embedded systems and signal processing.");
+    botMessage("📡 ECE: Communication systems, VLSI, embedded systems, IoT and signal processing.");
     backMenu();
 }
 
@@ -76,17 +78,85 @@ function eee() {
 }
 
 function mech() {
-    botMessage("🛠️ Mechanical Engineering: Design, manufacturing, automobiles, thermodynamics and robotics.");
+    botMessage("🛠️ Mechanical: Design, manufacturing, automobiles, robotics and thermal engineering.");
     backMenu();
 }
 
-function degree() {
-    botMessage("🎓 Degree Courses: B.Sc, B.Com, B.A with options in science, commerce and arts.");
+/* ---------- DEGREE ---------- */
+function degreeOptions() {
+    userMessage("Degree");
+    botMessage("Choose a Degree course:");
+    showButtons([
+        { text: "B.Sc", action: "bsc()" },
+        { text: "B.Com", action: "bcom()" },
+        { text: "B.A", action: "ba()" }
+    ]);
+}
+
+function bsc() {
+    botMessage(
+        "🔬 B.Sc:\nSubjects include Mathematics, Physics, Chemistry, Computer Science, Biotechnology, Data Science.\nCareers: Scientist, Analyst, Teacher, M.Sc."
+    );
     backMenu();
 }
 
+function bcom() {
+    botMessage(
+        "📊 B.Com:\nFocus on Accounting, Finance, Taxation, Economics and Business Management.\nCareers: Accountant, Banker, CA, MBA."
+    );
+    backMenu();
+}
+
+function ba() {
+    botMessage(
+        "📚 B.A:\nIncludes History, Political Science, Economics, Psychology, English.\nCareers: Civil Services, Teaching, Journalism, Law."
+    );
+    backMenu();
+}
+
+/* ---------- MEDICAL ---------- */
+function medical() {
+    userMessage("Medical");
+    botMessage("🩺 Medical courses after Inter (BiPC):");
+    showButtons([
+        { text: "MBBS", action: "mbbs()" },
+        { text: "BDS", action: "bds()" },
+        { text: "BAMS", action: "bams()" },
+        { text: "BHMS", action: "bhms()" }
+    ]);
+}
+
+function mbbs() {
+    botMessage(
+        "👩‍⚕️ MBBS:\nDuration: 5.5 years.\nEntrance: NEET.\nCareer: Doctor, MD/MS, hospitals."
+    );
+    backMenu();
+}
+
+function bds() {
+    botMessage(
+        "🦷 BDS:\nDuration: 5 years.\nEntrance: NEET.\nCareer: Dentist, dental clinics."
+    );
+    backMenu();
+}
+
+function bams() {
+    botMessage(
+        "🌿 BAMS:\nAyurvedic medicine.\nEntrance: NEET.\nCareer: Ayurvedic doctor."
+    );
+    backMenu();
+}
+
+function bhms() {
+    botMessage(
+        "💊 BHMS:\nHomeopathy medicine.\nEntrance: NEET.\nCareer: Homeopathy doctor."
+    );
+    backMenu();
+}
+
+/* ---------- DIPLOMA ---------- */
 function diploma() {
-    botMessage("📘 Diploma: Polytechnic & ITI courses focused on practical technical skills.");
+    botMessage("📘 Diploma: Polytechnic & ITI courses focused on practical skills and early jobs.");
     backMenu();
 }
 
@@ -102,17 +172,17 @@ function exams() {
 }
 
 function eamcet() {
-    botMessage("📝 EAMCET: State-level exam for engineering and pharmacy admissions.");
+    botMessage("📝 EAMCET: State-level engineering & pharmacy entrance exam.");
     backMenu();
 }
 
 function jee() {
-    botMessage("📝 JEE: National-level exam for IITs, NITs and top engineering colleges.");
+    botMessage("📝 JEE: National-level exam for IITs and NITs.");
     backMenu();
 }
 
 function gate() {
-    botMessage("📝 GATE: Exam for M.Tech admissions and PSU jobs.");
+    botMessage("📝 GATE: For M.Tech admissions and PSU jobs.");
     backMenu();
 }
 
@@ -128,21 +198,21 @@ function careers() {
 }
 
 function software() {
-    botMessage("👨‍💻 Software Engineer: Builds software, websites and applications using programming skills.");
+    botMessage("👨‍💻 Software Engineer: Develops applications and systems.");
     backMenu();
 }
 
 function data() {
-    botMessage("📊 Data Analyst: Analyzes data to help organizations make decisions.");
+    botMessage("📊 Data Analyst: Analyzes data for business decisions.");
     backMenu();
 }
 
 function govt() {
-    botMessage("🏛️ Government Jobs: UPSC, SSC, Banking, Railways and State services.");
+    botMessage("🏛️ Government Jobs: UPSC, SSC, Banking, Railways.");
     backMenu();
 }
 
-/* ---------- BACK MENU ---------- */
+/* ---------- BACK ---------- */
 function backMenu() {
     showButtons([
         { text: "Back to Menu", action: "startBot()" }
@@ -157,26 +227,18 @@ function handleText() {
     userMessage(msg);
     input.value = "";
 
-    if (msg === "hi" || msg === "hello") {
-        startBot();
-    } else if (msg.includes("course")) {
-        afterInter();
-    } else if (msg.includes("exam")) {
-        exams();
-    } else if (msg.includes("career")) {
-        careers();
-    } else if (msg.includes("bye")) {
-        botMessage("Thank you for using EduGuide Bot 👋");
-    } else {
-        botMessage("Sorry, I can help only with education-related queries.");
-    }
+    if (msg === "hi" || msg === "hello") startBot();
+    else if (msg.includes("course")) afterInter();
+    else if (msg.includes("exam")) exams();
+    else if (msg.includes("career")) careers();
+    else if (msg.includes("thank")) botMessage("You're welcome 😊 Happy to help!");
+    else if (msg.includes("bye")) botMessage("Thank you for using EduGuide Bot 👋");
+    else botMessage("Sorry, I can help only with education-related queries.");
 }
 
 /* ---------- ENTER KEY ---------- */
 input.addEventListener("keypress", function (e) {
-    if (e.key === "Enter") {
-        handleText();
-    }
+    if (e.key === "Enter") handleText();
 });
 
 /* ---------- VOICE INPUT ---------- */
@@ -185,11 +247,9 @@ function startVoice() {
         alert("Voice input not supported. Use Google Chrome.");
         return;
     }
-
     const recognition = new webkitSpeechRecognition();
     recognition.lang = "en-US";
     recognition.start();
-
     recognition.onresult = function (event) {
         input.value = event.results[0][0].transcript;
         handleText();
