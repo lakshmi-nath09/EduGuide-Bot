@@ -1,19 +1,19 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
     <title>EduGuide Bot</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<div class="chatbox">
-    <h2>🎓 EduGuide Bot</h2>
-    <div id="chat">
-        <p><b>Bot:</b> Hello! I am EduGuide Bot. How can I help you? 😊</p>
+<div class="chat-container">
+    <div class="chat-header">
+        🎓 EduGuide Bot
+        <span class="status">Online</span>
     </div>
 
-    <input type="text" id="userInput" placeholder="Ask about courses, exams, careers...">
-    <button onclick="sendMessage()">Send</button>
+    <div id="chat-body"></div>
 </div>
 
 <script src="script.js"></script>
