@@ -1,7 +1,7 @@
 const chat = document.getElementById("chat-body");
 const input = document.getElementById("textInput");
 
-/* ---------- Helpers ---------- */
+/* ---------- BASIC FUNCTIONS ---------- */
 function botMessage(text) {
     chat.innerHTML += `<div class="bot">${text}</div>`;
     chat.scrollTop = chat.scrollHeight;
@@ -14,15 +14,15 @@ function userMessage(text) {
 
 function showButtons(buttons) {
     let html = `<div class="buttons">`;
-    buttons.forEach(b => {
-        html += `<button onclick="${b.action}">${b.text}</button>`;
+    buttons.forEach(btn => {
+        html += `<button onclick="${btn.action}">${btn.text}</button>`;
     });
     html += `</div>`;
     chat.innerHTML += html;
     chat.scrollTop = chat.scrollHeight;
 }
 
-/* ---------- Bot Flow ---------- */
+/* ---------- START BOT ---------- */
 function startBot() {
     botMessage("Hi 👋 I am EduGuide Bot. How can I help you?");
     showButtons([
@@ -32,33 +32,117 @@ function startBot() {
     ]);
 }
 
+/* ---------- COURSES ---------- */
 function afterInter() {
     userMessage("Courses after Inter");
     botMessage("You can choose:");
     showButtons([
-        { text: "B.Tech", action: "reply('B.Tech branches: CSE, AI & DS, ECE, EEE, MECH')" },
-        { text: "Degree", action: "reply('Degree courses: B.Sc, B.Com, B.A')" },
-        { text: "Diploma", action: "reply('Diploma options: Polytechnic, ITI')" }
+        { text: "B.Tech", action: "btechBranches()" },
+        { text: "Degree", action: "degree()" },
+        { text: "Diploma", action: "diploma()" }
     ]);
 }
 
+function btechBranches() {
+    userMessage("B.Tech");
+    botMessage("Choose a B.Tech branch:");
+    showButtons([
+        { text: "CSE", action: "cse()" },
+        { text: "AI & DS", action: "ai()" },
+        { text: "ECE", action: "ece()" },
+        { text: "EEE", action: "eee()" },
+        { text: "MECH", action: "mech()" }
+    ]);
+}
+
+function cse() {
+    botMessage("💻 CSE (Computer Science Engineering): Programming, software development, AI, ML, data science and web technologies.");
+    backMenu();
+}
+
+function ai() {
+    botMessage("🤖 AI & DS: Artificial Intelligence, Machine Learning, Data Analytics, Deep Learning and automation.");
+    backMenu();
+}
+
+function ece() {
+    botMessage("📡 ECE: Communication systems, VLSI, embedded systems and signal processing.");
+    backMenu();
+}
+
+function eee() {
+    botMessage("⚡ EEE: Power systems, electrical machines, renewable energy and control systems.");
+    backMenu();
+}
+
+function mech() {
+    botMessage("🛠️ Mechanical Engineering: Design, manufacturing, automobiles, thermodynamics and robotics.");
+    backMenu();
+}
+
+function degree() {
+    botMessage("🎓 Degree Courses: B.Sc, B.Com, B.A with options in science, commerce and arts.");
+    backMenu();
+}
+
+function diploma() {
+    botMessage("📘 Diploma: Polytechnic & ITI courses focused on practical technical skills.");
+    backMenu();
+}
+
+/* ---------- EXAMS ---------- */
 function exams() {
     userMessage("Exams");
-    botMessage("Popular exams: EAMCET, JEE, GATE.");
+    botMessage("Choose an exam:");
+    showButtons([
+        { text: "EAMCET", action: "eamcet()" },
+        { text: "JEE", action: "jee()" },
+        { text: "GATE", action: "gate()" }
+    ]);
+}
+
+function eamcet() {
+    botMessage("📝 EAMCET: State-level exam for engineering and pharmacy admissions.");
     backMenu();
 }
 
+function jee() {
+    botMessage("📝 JEE: National-level exam for IITs, NITs and top engineering colleges.");
+    backMenu();
+}
+
+function gate() {
+    botMessage("📝 GATE: Exam for M.Tech admissions and PSU jobs.");
+    backMenu();
+}
+
+/* ---------- CAREERS ---------- */
 function careers() {
     userMessage("Careers");
-    botMessage("Career options: Software Engineer, Data Analyst, Government Jobs.");
+    botMessage("Choose a career option:");
+    showButtons([
+        { text: "Software Engineer", action: "software()" },
+        { text: "Data Analyst", action: "data()" },
+        { text: "Government Jobs", action: "govt()" }
+    ]);
+}
+
+function software() {
+    botMessage("👨‍💻 Software Engineer: Builds software, websites and applications using programming skills.");
     backMenu();
 }
 
-function reply(text) {
-    botMessage(text);
+function data() {
+    botMessage("📊 Data Analyst: Analyzes data to help organizations make decisions.");
     backMenu();
 }
 
+function govt() {
+    botMessage("🏛️ Government Jobs: UPSC, SSC, Banking, Railways and State services.");
+    backMenu();
+}
+
+/* ---------- BACK MENU ---------- */
 function backMenu() {
     showButtons([
         { text: "Back to Menu", action: "startBot()" }
@@ -75,25 +159,20 @@ function handleText() {
 
     if (msg === "hi" || msg === "hello") {
         startBot();
-    }
-    else if (msg.includes("course")) {
+    } else if (msg.includes("course")) {
         afterInter();
-    }
-    else if (msg.includes("exam")) {
+    } else if (msg.includes("exam")) {
         exams();
-    }
-    else if (msg.includes("career")) {
+    } else if (msg.includes("career")) {
         careers();
-    }
-    else if (msg.includes("bye")) {
+    } else if (msg.includes("bye")) {
         botMessage("Thank you for using EduGuide Bot 👋");
-    }
-    else {
-        botMessage("Sorry, I can guide only on education topics.");
+    } else {
+        botMessage("Sorry, I can help only with education-related queries.");
     }
 }
 
-/* ---------- ENTER KEY SUPPORT ---------- */
+/* ---------- ENTER KEY ---------- */
 input.addEventListener("keypress", function (e) {
     if (e.key === "Enter") {
         handleText();
@@ -102,8 +181,8 @@ input.addEventListener("keypress", function (e) {
 
 /* ---------- VOICE INPUT ---------- */
 function startVoice() {
-    if (!('webkitSpeechRecognition' in window)) {
-        alert("Voice recognition not supported. Use Google Chrome.");
+    if (!("webkitSpeechRecognition" in window)) {
+        alert("Voice input not supported. Use Google Chrome.");
         return;
     }
 
@@ -112,11 +191,10 @@ function startVoice() {
     recognition.start();
 
     recognition.onresult = function (event) {
-        const speech = event.results[0][0].transcript;
-        input.value = speech;
+        input.value = event.results[0][0].transcript;
         handleText();
     };
 }
 
-/* ---------- START ---------- */
+/* ---------- INIT ---------- */
 startBot();
