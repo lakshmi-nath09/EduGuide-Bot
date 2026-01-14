@@ -3,7 +3,7 @@ const input = document.getElementById("textInput");
 
 /* ---------- BASIC FUNCTIONS ---------- */
 function botMessage(text) {
-    chat.innerHTML += `<div class="bot">${text}</div>`;
+    chat.innerHTML += `<div class="bot">${text.replace(/\n/g, "<br>")}</div>`;
     chat.scrollTop = chat.scrollHeight;
 }
 
@@ -35,7 +35,7 @@ function startBot() {
 /* ---------- COURSES AFTER INTER ---------- */
 function afterInter() {
     userMessage("Courses after Inter");
-    botMessage("You can choose:");
+    botMessage("Choose your path:");
     showButtons([
         { text: "B.Tech", action: "btechBranches()" },
         { text: "Degree", action: "degreeOptions()" },
@@ -58,27 +58,27 @@ function btechBranches() {
 }
 
 function cse() {
-    botMessage("💻 CSE: Programming, software development, AI, ML, data science, cybersecurity and web technologies.");
+    botMessage("💻 CSE:\nProgramming, software development, AI, ML, data science, cybersecurity.");
     backMenu();
 }
 
 function ai() {
-    botMessage("🤖 AI & DS: Artificial Intelligence, Machine Learning, Data Analytics, Deep Learning and automation.");
+    botMessage("🤖 AI & DS:\nArtificial Intelligence, Machine Learning, Data Analytics, Deep Learning.");
     backMenu();
 }
 
 function ece() {
-    botMessage("📡 ECE: Communication systems, VLSI, embedded systems, IoT and signal processing.");
+    botMessage("📡 ECE:\nCommunication systems, VLSI, embedded systems, IoT.");
     backMenu();
 }
 
 function eee() {
-    botMessage("⚡ EEE: Power systems, electrical machines, renewable energy and control systems.");
+    botMessage("⚡ EEE:\nPower systems, electrical machines, renewable energy.");
     backMenu();
 }
 
 function mech() {
-    botMessage("🛠️ Mechanical: Design, manufacturing, automobiles, robotics and thermal engineering.");
+    botMessage("🛠️ Mechanical:\nDesign, manufacturing, automobiles, robotics.");
     backMenu();
 }
 
@@ -94,30 +94,24 @@ function degreeOptions() {
 }
 
 function bsc() {
-    botMessage(
-        "🔬 B.Sc:\nSubjects include Mathematics, Physics, Chemistry, Computer Science, Biotechnology, Data Science.\nCareers: Scientist, Analyst, Teacher, M.Sc."
-    );
+    botMessage("🔬 B.Sc:\nSubjects: Maths, Physics, CS, Data Science.\nCareers: Analyst, Scientist, M.Sc.");
     backMenu();
 }
 
 function bcom() {
-    botMessage(
-        "📊 B.Com:\nFocus on Accounting, Finance, Taxation, Economics and Business Management.\nCareers: Accountant, Banker, CA, MBA."
-    );
+    botMessage("📊 B.Com:\nAccounting, Finance, Taxation.\nCareers: Accountant, Banking, MBA, CA.");
     backMenu();
 }
 
 function ba() {
-    botMessage(
-        "📚 B.A:\nIncludes History, Political Science, Economics, Psychology, English.\nCareers: Civil Services, Teaching, Journalism, Law."
-    );
+    botMessage("📚 B.A:\nHistory, Economics, Psychology.\nCareers: UPSC, Teaching, Journalism.");
     backMenu();
 }
 
 /* ---------- MEDICAL ---------- */
 function medical() {
     userMessage("Medical");
-    botMessage("🩺 Medical courses after Inter (BiPC):");
+    botMessage("🩺 Medical courses after Inter:");
     showButtons([
         { text: "MBBS", action: "mbbs()" },
         { text: "BDS", action: "bds()" },
@@ -127,36 +121,28 @@ function medical() {
 }
 
 function mbbs() {
-    botMessage(
-        "👩‍⚕️ MBBS:\nDuration: 5.5 years.\nEntrance: NEET.\nCareer: Doctor, MD/MS, hospitals."
-    );
+    botMessage("👩‍⚕️ MBBS:\nDuration: 5.5 years\nExam: NEET\nCareer: Doctor, MD/MS.");
     backMenu();
 }
 
 function bds() {
-    botMessage(
-        "🦷 BDS:\nDuration: 5 years.\nEntrance: NEET.\nCareer: Dentist, dental clinics."
-    );
+    botMessage("🦷 BDS:\nDuration: 5 years\nExam: NEET\nCareer: Dentist.");
     backMenu();
 }
 
 function bams() {
-    botMessage(
-        "🌿 BAMS:\nAyurvedic medicine.\nEntrance: NEET.\nCareer: Ayurvedic doctor."
-    );
+    botMessage("🌿 BAMS:\nAyurvedic medicine\nExam: NEET.");
     backMenu();
 }
 
 function bhms() {
-    botMessage(
-        "💊 BHMS:\nHomeopathy medicine.\nEntrance: NEET.\nCareer: Homeopathy doctor."
-    );
+    botMessage("💊 BHMS:\nHomeopathy medicine\nExam: NEET.");
     backMenu();
 }
 
 /* ---------- DIPLOMA ---------- */
 function diploma() {
-    botMessage("📘 Diploma: Polytechnic & ITI courses focused on practical skills and early jobs.");
+    botMessage("📘 Diploma:\nPolytechnic & ITI – practical skills & early jobs.");
     backMenu();
 }
 
@@ -172,24 +158,24 @@ function exams() {
 }
 
 function eamcet() {
-    botMessage("📝 EAMCET: State-level engineering & pharmacy entrance exam.");
+    botMessage("📝 EAMCET:\nState-level engineering & pharmacy exam.");
     backMenu();
 }
 
 function jee() {
-    botMessage("📝 JEE: National-level exam for IITs and NITs.");
+    botMessage("📝 JEE:\nNational-level exam for IITs & NITs.");
     backMenu();
 }
 
 function gate() {
-    botMessage("📝 GATE: For M.Tech admissions and PSU jobs.");
+    botMessage("📝 GATE:\nFor M.Tech admissions & PSU jobs.");
     backMenu();
 }
 
 /* ---------- CAREERS ---------- */
 function careers() {
     userMessage("Careers");
-    botMessage("Choose a career option:");
+    botMessage("Choose a career:");
     showButtons([
         { text: "Software Engineer", action: "software()" },
         { text: "Data Analyst", action: "data()" },
@@ -197,22 +183,90 @@ function careers() {
     ]);
 }
 
+/* ---------- SOFTWARE ENGINEER ---------- */
 function software() {
-    botMessage("👨‍💻 Software Engineer: Develops applications and systems.");
+    botMessage(
+        "👨‍💻 Software Engineer:\n\n" +
+        "Stages:\n" +
+        "1️⃣ Learn Programming (C/Java/Python)\n" +
+        "2️⃣ DSA & Problem Solving\n" +
+        "3️⃣ Web/App Technologies\n" +
+        "4️⃣ Projects & Internships\n" +
+        "5️⃣ Technical + HR Interview\n\n" +
+        "Job Roles:\n" +
+        "• Software Developer\n• Web Developer\n• Full Stack Developer\n• Backend Engineer"
+    );
     backMenu();
 }
 
+/* ---------- DATA ANALYST ---------- */
 function data() {
-    botMessage("📊 Data Analyst: Analyzes data for business decisions.");
+    botMessage(
+        "📊 Data Analyst:\n\n" +
+        "Stages:\n" +
+        "1️⃣ Excel & Statistics\n" +
+        "2️⃣ SQL & Python\n" +
+        "3️⃣ Power BI / Tableau\n" +
+        "4️⃣ Projects\n" +
+        "5️⃣ Interview\n\n" +
+        "Job Roles:\n" +
+        "• Data Analyst\n• Business Analyst\n• Reporting Analyst"
+    );
     backMenu();
 }
 
+/* ---------- GOVERNMENT JOBS ---------- */
 function govt() {
-    botMessage("🏛️ Government Jobs: UPSC, SSC, Banking, Railways.");
+    botMessage("🏛️ Government Jobs:\nChoose category:");
+    showButtons([
+        { text: "UPSC", action: "upsc()" },
+        { text: "SSC", action: "ssc()" },
+        { text: "Banking", action: "banking()" },
+        { text: "Railways", action: "railways()" }
+    ]);
+}
+
+function upsc() {
+    botMessage(
+        "🇮🇳 UPSC:\n" +
+        "Exams: IAS, IPS, IFS\n" +
+        "Stages: Prelims → Mains → Interview\n" +
+        "Jobs: Civil Services Officers"
+    );
     backMenu();
 }
 
-/* ---------- BACK ---------- */
+function ssc() {
+    botMessage(
+        "🏢 SSC:\n" +
+        "Exams: CGL, CHSL\n" +
+        "Stages: Tier-1 → Tier-2 → Skill Test\n" +
+        "Jobs: Clerk, Inspector, Assistant"
+    );
+    backMenu();
+}
+
+function banking() {
+    botMessage(
+        "🏦 Banking:\n" +
+        "Exams: SBI PO, IBPS PO\n" +
+        "Stages: Prelims → Mains → Interview\n" +
+        "Jobs: PO, Clerk, Manager"
+    );
+    backMenu();
+}
+
+function railways() {
+    botMessage(
+        "🚆 Railways:\n" +
+        "Exams: NTPC, Group-D\n" +
+        "Stages: CBT → Skill Test → DV\n" +
+        "Jobs: Station Master, Technician"
+    );
+    backMenu();
+}
+
+/* ---------- BACK MENU ---------- */
 function backMenu() {
     showButtons([
         { text: "Back to Menu", action: "startBot()" }
@@ -222,7 +276,7 @@ function backMenu() {
 /* ---------- TEXT INPUT ---------- */
 function handleText() {
     let msg = input.value.trim().toLowerCase();
-    if (msg === "") return;
+    if (!msg) return;
 
     userMessage(msg);
     input.value = "";
@@ -237,21 +291,21 @@ function handleText() {
 }
 
 /* ---------- ENTER KEY ---------- */
-input.addEventListener("keypress", function (e) {
+input.addEventListener("keypress", e => {
     if (e.key === "Enter") handleText();
 });
 
 /* ---------- VOICE INPUT ---------- */
 function startVoice() {
     if (!("webkitSpeechRecognition" in window)) {
-        alert("Voice input not supported. Use Google Chrome.");
+        alert("Voice input supported only in Chrome.");
         return;
     }
     const recognition = new webkitSpeechRecognition();
     recognition.lang = "en-US";
     recognition.start();
-    recognition.onresult = function (event) {
-        input.value = event.results[0][0].transcript;
+    recognition.onresult = e => {
+        input.value = e.results[0][0].transcript;
         handleText();
     };
 }
