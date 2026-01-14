@@ -1,5 +1,7 @@
 const chat = document.getElementById("chat-body");
+const input = document.getElementById("textInput");
 
+/* -------- Display Messages -------- */
 function botMessage(text) {
     chat.innerHTML += `<div class="bot">${text}</div>`;
     chat.scrollTop = chat.scrollHeight;
@@ -11,106 +13,100 @@ function userMessage(text) {
 }
 
 function showButtons(buttons) {
-    let btnHTML = '<div class="buttons">';
-    buttons.forEach(btn => {
-        btnHTML += `<button onclick="${btn.action}">${btn.text}</button>`;
+    let html = `<div class="buttons">`;
+    buttons.forEach(b => {
+        html += `<button onclick="${b.action}">${b.text}</button>`;
     });
-    btnHTML += '</div>';
-    chat.innerHTML += btnHTML;
+    html += `</div>`;
+    chat.innerHTML += html;
     chat.scrollTop = chat.scrollHeight;
 }
 
-/* ---------- Conversation Flow ---------- */
-
+/* -------- Conversation Flow -------- */
 function startBot() {
     botMessage("Hi 👋 I am EduGuide Bot. How can I help you?");
     showButtons([
-        { text: "Courses", action: "courses()" },
+        { text: "Courses after Inter", action: "afterInter()" },
         { text: "Exams", action: "exams()" },
-        { text: "Careers", action: "careers()" }
-    ]);
-}
-
-function courses() {
-    userMessage("Courses");
-    botMessage("Select your education level:");
-    showButtons([
-        { text: "After Inter", action: "afterInter()" },
-        { text: "After Degree", action: "afterDegree()" }
+        { text: "Career", action: "careers()" }
     ]);
 }
 
 function afterInter() {
-    userMessage("After Inter");
-    botMessage("You can choose from:");
+    userMessage("Courses after Inter");
+    botMessage("You can choose:");
     showButtons([
-        { text: "B.Tech", action: "btech()" },
-        { text: "Degree", action: "degree()" },
-        { text: "Diploma", action: "diploma()" }
+        { text: "B.Tech", action: "simpleReply('B.Tech branches: CSE, AI & DS, ECE, EEE, MECH')" },
+        { text: "Degree", action: "simpleReply('Degree courses: B.Sc, B.Com, B.A')" },
+        { text: "Diploma", action: "simpleReply('Diploma options: Polytechnic, ITI')" }
     ]);
-}
-
-function btech() {
-    userMessage("B.Tech");
-    botMessage("B.Tech branches: CSE, AI & DS, ECE, EEE, MECH, CIVIL.");
-    backMenu();
-}
-
-function degree() {
-    userMessage("Degree");
-    botMessage("Degree courses: B.Sc, B.Com, B.A.");
-    backMenu();
-}
-
-function diploma() {
-    userMessage("Diploma");
-    botMessage("Diploma options: Polytechnic, ITI, Technical Courses.");
-    backMenu();
-}
-
-function afterDegree() {
-    userMessage("After Degree");
-    botMessage("Options: M.Tech, MBA, MCA, Government Exams.");
-    backMenu();
 }
 
 function exams() {
     userMessage("Exams");
-    botMessage("Popular exams:");
-    showButtons([
-        { text: "EAMCET", action: "examInfo('EAMCET')" },
-        { text: "JEE", action: "examInfo('JEE')" },
-        { text: "GATE", action: "examInfo('GATE')" }
-    ]);
-}
-
-function examInfo(exam) {
-    userMessage(exam);
-    botMessage(exam + " is a popular entrance exam for higher education.");
+    botMessage("Popular exams include EAMCET, JEE, NEET, GATE.");
     backMenu();
 }
 
 function careers() {
-    userMessage("Careers");
-    botMessage("Career options include:");
-    showButtons([
-        { text: "Software Engineer", action: "careerInfo('Software Engineer')" },
-        { text: "Data Analyst", action: "careerInfo('Data Analyst')" },
-        { text: "Government Jobs", action: "careerInfo('Government Jobs')" }
-    ]);
+    userMessage("Career");
+    botMessage("Career options: Software Engineer, Data Analyst, Government Jobs.");
+    backMenu();
 }
 
-function careerInfo(career) {
-    userMessage(career);
-    botMessage(career + " requires skill development and consistent practice.");
+function simpleReply(text) {
+    botMessage(text);
     backMenu();
 }
 
 function backMenu() {
-    showButtons([
-        { text: "Back to Menu", action: "startBot()" }
-    ]);
+    showButtons([{ text: "Back to Menu", action: "startBot()" }]);
 }
 
-/* Start chatbot */
+/* -------- TEXT INPUT HANDLING -------- */
+function handleText() {
+    let msg = input.value.toLowerCase();
+    if (!msg) return;
+    userMessage(msg);
+    input.value = "";
+
+    if (msg.includes("hi")) {
+        startBot();
+    }
+    else if (msg.includes("courses")) {
+        afterInter();
+    }
+    else if (msg.includes("exam")) {
+        exams();
+    }
+    else if (msg.includes("career")) {
+        careers();
+    }
+    else if (msg.includes("bye")) {
+        botMessage("Thank you for using EduGuide Bot 👋");
+    }
+    else {
+        botMessage("Sorry, I can guide only on education topics.");
+    }
+}
+
+/* -------- VOICE INPUT -------- */
+function startVoice() {
+    if (!('webkitSpeechRecognition' in window)) {
+        alert("Voice not supported in this browser");
+        return;
+    }
+
+    const recognition = new webkitSpeechRecognition();
+    recognition.lang = "en-US";
+    recognition.start();
+
+    recognition.onresult = function(event) {
+        const speech = event.results[0][0].transcript;
+        input.value = speech;
+        handleText();
+    };
+}
+
+/* Start bot */
 startBot();
